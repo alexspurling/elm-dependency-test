@@ -3,7 +3,9 @@ module Main where
 import Graphics.Element exposing (show)
 import Planet exposing (Planet)
 import Ship exposing (Ship)
-import Shared exposing (Action)
+
+type Action =
+  MainAction
 
 type alias Model =
   { ship : Ship,
@@ -15,10 +17,12 @@ model = Model (Ship "Foo") (Planet "Bar")
 
 update : Action -> Model -> Model
 update action model =
-  {model |
-    ship <- (Ship.update action),
-    planet <- (Planet.update action)
-  }
+  case action of
+    MainAction ->
+      {model |
+        ship <- (Ship.update Ship.Update),
+        planet <- (Planet.update (Planet.PlanetAction model.planet))
+      }
 
 main =
-  show (update Shared.Init model)
+  show (update MainAction model)

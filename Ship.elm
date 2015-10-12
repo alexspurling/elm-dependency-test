@@ -1,6 +1,6 @@
 module Ship where
 
-import Shared exposing (Action)
+type Action = Update
 
 type alias Ship =
   { name : String

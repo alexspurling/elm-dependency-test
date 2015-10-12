@@ -1,6 +1,6 @@
 module Planet where
 
-import Shared exposing (Action)
+type Action = Update | PlanetAction Planet
 
 type alias Planet =
   { name : String
